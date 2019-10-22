@@ -36,6 +36,14 @@ public class Botones {
 			this.new_Button.setText("Buscar Palabra");
 		}
 	}
+	/**
+	 * 
+	 * @param button
+	 * @param type
+	 * @param Stage
+	 * Sobre este metodo tendremos un Overload, para poder utilizar la escena
+	 * que se tiene como principal
+	 */
 	public void setButton(Botones button, Button_type type,Stage Stage) {
 		Button new_Button = new Button();
 			
