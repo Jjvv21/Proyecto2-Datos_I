@@ -3,6 +3,7 @@ package Interfaz;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,16 +18,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 public class Main extends Application { 
+	//ATRIBUTOS DE LA VENTANA PRINCIPAL
 	public static Pane derecha = new Pane();
 	private BorderPane Estructura = new BorderPane();
 	public ToolBar Herramientas = new ToolBar();
-	private static TextField caja = new TextField();
+	private static TextField caja_De_Entrada = new TextField();
+	private static TextField search = new TextField();
 	public static ObservableList<Caracteristicas_De_Archivos> datos = FXCollections.observableArrayList();
-	private VBox CajaVertical = new VBox(new Label("Left Control"));
+	FilteredList<Caracteristicas_De_Archivos> filteredData = new FilteredList<>(datos, p -> true);
+
 
 	public  void start(Stage Stage) {
 		
@@ -53,41 +58,51 @@ public class Main extends Application {
 		
 		
 		
-		// HACER ESTO CON ENUM Y AGREGAR COLUMNAS
-
         
+        // ESTRUCTURA PARA LA TABLA
+        TableViewer estructura = new TableViewer();
+        
+        //ESTRUCTURA DE LA TABLA
 		TableViewer tabla = new TableViewer();
+		//BOTON AÑADIR
 		Botones Añadir = new Botones();
+		//BOTON QUITAR
 		Botones Quitar = new Botones();
+		//BOTON SUBIR
 		Botones Subir = new Botones();
+		//BOTON BAJAR
 		Botones Bajar = new Botones();
+		//BOTON BUSCAR
 		Botones Buscar = new Botones();
+		//
 		
-		tabla.setTable( datos, tabla, Direccion, Nombre, Peso, Fecha);
+		
+		// CREACION DE ELEMENTOS CON SUS PARAMETROS
+	
+		tabla.setTable(filteredData, tabla, Direccion, Nombre, Peso, Fecha);
+		//
+		estructura.crearCaja(search, tabla.getTable(),filteredData);
+		//
 		Añadir.setButton(Añadir, Button_type.Añadir_Archivo, Stage);
+		//
 		Quitar.setButton(Quitar, Button_type.Quitar_Archivo);
+		//
 		Subir.setButton(Subir, Button_type.Subir);
+		//
 		Bajar.setButton(Bajar, Button_type.Bajar);
+		//
 		Buscar.setButton(Buscar, Button_type.Buscar);
+		//
+		caja_De_Entrada.setPromptText("Buscar...");
 		
 		
 		
-		//DIMENSIONES Y CARACTERISTICAS DEL PANE QUE CONTIENE LA TABLA
-		
-		ScrollPane izquierda = new ScrollPane(tabla.getTable());
-		izquierda.setPrefHeight(1000);
-		izquierda.setMaxSize(300, 1000);
-		tabla.getTable().setPrefHeight(1000);
-		tabla.getTable().setPrefWidth(1000);
-		VBox Vertical = new VBox(izquierda);
-		Vertical.setPadding(new Insets(15,15,15,15));
-
 
 		
-		
-		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja,Buscar.getButton());
+		//ESTRUCTURA PRINCIPAL
+		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
 		Estructura.setTop(Herramientas);
-		Estructura.setLeft(Vertical);
+		Estructura.setLeft(estructura.getCaja());
 		Estructura.setRight(derecha);
 		Scene escena = new Scene(Estructura,950,1000);
 		Stage.setTitle("TextFinder");
