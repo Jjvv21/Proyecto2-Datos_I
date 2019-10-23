@@ -25,9 +25,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application { 
 	//ATRIBUTOS DE LA VENTANA PRINCIPAL
-	public static Pane derecha = new Pane();
 	private BorderPane Estructura = new BorderPane();
 	public ToolBar Herramientas = new ToolBar();
+	public ToolBar Controles = new ToolBar();
 	private static TextField caja_De_Entrada = new TextField();
 	private static TextField search = new TextField();
 	public static Label texto = new Label("Aquí se mostrarán las coincidencias del texto que busques.");
@@ -81,7 +81,6 @@ public class Main extends Application {
 		Botones Buscar = new Botones();
 		//
 
-
 		//Configuración del Stackpane que tiene al label en donde se mostrará el texto
 		StackPane centeredarch = new StackPane(texto);
 		centeredarch.setStyle("-fx-background-color: #d2d7db;");
@@ -106,17 +105,20 @@ public class Main extends Application {
 		Buscar.setButton(Buscar, Button_type.Buscar);
 		//
 		caja_De_Entrada.setPromptText("Buscar...");
-		
-		
+
+		//Configuración Toolbars
+		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
+		Herramientas.setStyle("-fx-background-color: #6C6C6C;");
+
+		Controles.setStyle("-fx-background-color: #6C6C6C;");
 		
 
 		
 		//ESTRUCTURA PRINCIPAL
-		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
 		Estructura.setTop(Herramientas);
 		Estructura.setCenter(archroot);
 		Estructura.setLeft(estructura.getCaja());
-		Estructura.setRight(derecha);
+		Estructura.setRight(Controles);
 		Scene escena = new Scene(Estructura,1350,1000);
 		Stage.setTitle("TextFinder");
 		Stage.setScene(escena);

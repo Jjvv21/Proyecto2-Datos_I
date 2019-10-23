@@ -86,11 +86,11 @@ public class TableViewer {
 		EstructuraInterior.setCenter(Tabla);
 		ScrollPane izquierda = new ScrollPane(EstructuraInterior);
 		izquierda.setPrefHeight(1000);
-		izquierda.setMaxSize(300, 1000);
+		izquierda.setMaxSize(335, 1000);
 		Tabla.setPrefHeight(1000);
 		Tabla.setPrefWidth(1000);
 		VBox Vertical = new VBox(izquierda);
-		Vertical.setPadding(new Insets(15,15,15,15));
+		Vertical.setPadding(new Insets(15,0,15,15));
 		//METODO PARA LA BUSQUEDA
 		Entrada.setPromptText("BuscarArchivo");
 		Entrada.textProperty().addListener((prop, old, text) -> {
