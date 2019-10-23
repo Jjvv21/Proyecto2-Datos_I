@@ -7,6 +7,11 @@ import Interfaz.Main;
 import Interfaz.TableViewer;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import Interfaz.TableViewer;
 import javafx.collections.FXCollections;
@@ -41,7 +46,22 @@ public class Eventos_de_Botones {
 		        		 tabla.Peso(file.length());
 		        		 tabla.Nombre(file.getName());
 		        		 String Tamaño = Long.toString(file.length());
-		        		 Main.datos.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(), "FECHA"));
+		        		 BasicFileAttributes attrs;
+		        			try {
+		        			    attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+		        			    FileTime time = attrs.creationTime();
+		        			    
+		        			    String pattern = "yyyy-MM-dd HH:mm:ss";
+		        			    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		        				
+		        			    String formatted = simpleDateFormat.format( new Date( time.toMillis() ) );
+		        			    Main.datos.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
+		        			   
+		        			} catch (IOException e) {
+		        			    e.printStackTrace();
+		        			}
+		        	
+		        		 
 		        	}else {
 		        		
 		        		Alert Alerta1 = new Alert(AlertType.INFORMATION);
