@@ -35,8 +35,6 @@ public class Main extends Application {
 
 	
 	public  void start(Stage Stage) {
-		
-		
 		 TableColumn<Caracteristicas_De_Archivos, String> Nombre = new TableColumn<>("Name");
 		 
 		 Nombre.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Nombre"));
@@ -51,7 +49,7 @@ public class Main extends Application {
         
         Direccion.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Direccion"));
         Direccion.setResizable(true);
-        
+
         TableColumn<Caracteristicas_De_Archivos, String> Fecha = new TableColumn<>("Date");
         
         Fecha.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Fecha"));
