@@ -17,6 +17,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -29,6 +30,7 @@ public class Main extends Application {
 	public ToolBar Herramientas = new ToolBar();
 	private static TextField caja_De_Entrada = new TextField();
 	private static TextField search = new TextField();
+	public static Label texto = new Label("Aquí se mostrarán las coincidencias del texto que busques.");
 	public static ObservableList<Caracteristicas_De_Archivos> datos = FXCollections.observableArrayList();
 	FilteredList<Caracteristicas_De_Archivos> filteredData = new FilteredList<>(datos, p -> true);
 
@@ -61,7 +63,10 @@ public class Main extends Application {
         
         // ESTRUCTURA PARA LA TABLA
         TableViewer estructura = new TableViewer();
-        
+
+		//Configuración del Texto en el Label
+		texto.setWrapText(true);
+
         //ESTRUCTURA DE LA TABLA
 		TableViewer tabla = new TableViewer();
 		//BOTON AÑADIR
@@ -75,8 +80,15 @@ public class Main extends Application {
 		//BOTON BUSCAR
 		Botones Buscar = new Botones();
 		//
-		
-		
+
+
+		//Configuración del Stackpane que tiene al label en donde se mostrará el texto
+		StackPane centeredarch = new StackPane(texto);
+		centeredarch.setStyle("-fx-background-color: #d2d7db;");
+
+		StackPane archroot = new StackPane(centeredarch);
+		archroot.setPadding(new Insets(35));
+
 		// CREACION DE ELEMENTOS CON SUS PARAMETROS
 	
 		tabla.setTable(filteredData, tabla, Direccion, Nombre, Peso, Fecha);
@@ -102,9 +114,10 @@ public class Main extends Application {
 		//ESTRUCTURA PRINCIPAL
 		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
 		Estructura.setTop(Herramientas);
+		Estructura.setCenter(archroot);
 		Estructura.setLeft(estructura.getCaja());
 		Estructura.setRight(derecha);
-		Scene escena = new Scene(Estructura,950,1000);
+		Scene escena = new Scene(Estructura,1350,1000);
 		Stage.setTitle("TextFinder");
 		Stage.setScene(escena);
 		Stage.show();
