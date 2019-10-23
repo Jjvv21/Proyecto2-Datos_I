@@ -27,14 +27,13 @@ public class Main extends Application {
 	//ATRIBUTOS DE LA VENTANA PRINCIPAL
 	private BorderPane Estructura = new BorderPane();
 	public ToolBar Herramientas = new ToolBar();
-	public ToolBar Controles = new ToolBar();
 	private static TextField caja_De_Entrada = new TextField();
 	private static TextField search = new TextField();
 	public static Label texto = new Label("Aquí se mostrarán las coincidencias del texto que busques.");
 	public static ObservableList<Caracteristicas_De_Archivos> datos = FXCollections.observableArrayList();
 	FilteredList<Caracteristicas_De_Archivos> filteredData = new FilteredList<>(datos, p -> true);
 
-
+	
 	public  void start(Stage Stage) {
 		
 		
@@ -64,9 +63,6 @@ public class Main extends Application {
         // ESTRUCTURA PARA LA TABLA
         TableViewer estructura = new TableViewer();
 
-		//Configuración del Texto en el Label
-		texto.setWrapText(true);
-
         //ESTRUCTURA DE LA TABLA
 		TableViewer tabla = new TableViewer();
 		//BOTON AÑADIR
@@ -80,6 +76,7 @@ public class Main extends Application {
 		//BOTON BUSCAR
 		Botones Buscar = new Botones();
 		//
+		Controles controles = new Controles();
 
 		//Configuración del Stackpane que tiene al label en donde se mostrará el texto
 		StackPane centeredarch = new StackPane(texto);
@@ -105,20 +102,25 @@ public class Main extends Application {
 		Buscar.setButton(Buscar, Button_type.Buscar);
 		//
 		caja_De_Entrada.setPromptText("Buscar...");
+		//
+		controles.CrearToolBar(controles);
 
 		//Configuración Toolbars
 		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
 		Herramientas.setStyle("-fx-background-color: #6C6C6C;");
 
-		Controles.setStyle("-fx-background-color: #6C6C6C;");
+		
 		
 
 		
 		//ESTRUCTURA PRINCIPAL
+		
+		//Configuración del Texto en el Label
+		texto.setWrapText(true);
 		Estructura.setTop(Herramientas);
 		Estructura.setCenter(archroot);
 		Estructura.setLeft(estructura.getCaja());
-		Estructura.setRight(Controles);
+		Estructura.setRight(controles.getControles());
 		Scene escena = new Scene(Estructura,1350,1000);
 		Stage.setTitle("TextFinder");
 		Stage.setScene(escena);

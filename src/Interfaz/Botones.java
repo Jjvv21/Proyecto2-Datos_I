@@ -1,5 +1,8 @@
 package Interfaz;
 
+import java.io.File;
+import java.io.FileInputStream;
+
 import Eventos.Eventos_de_Botones;
 import Interfaz.Botones;
 import Interfaz.Button_type;
@@ -7,15 +10,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Botones {
 	private Button new_Button; 
-	
-	
+	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
 	public Button getButton() {
 		return new_Button; 
+		
 	}
 	/**
 	 * Metodo para insertar un Boton dentro de la ventana segun su tipo
@@ -23,18 +28,43 @@ public class Botones {
 	 * @param type
 	 */
 	public void setButton(Botones button, Button_type type) {
-		this.new_Button = new Button();
-		if(type == Button_type.Quitar_Archivo ) {
-			this.new_Button.setText("Quitar_Archivo");
-		}else if(type==Button_type.Añadir_Archivo) {
-			this.new_Button.setText("Añadir archivo");
-		}else if(type== Button_type.Bajar) {
-			this.new_Button.setText("Bajar");
-		}else if (type == Button_type.Subir) {
-			this.new_Button.setText("subir");
-		}else if(type == Button_type.Buscar) {
-			this.new_Button.setText("Buscar Palabra");
+		try {
+			this.new_Button = new Button();
+			if(type == Button_type.Quitar_Archivo ) {
+				FileInputStream input = new FileInputStream(imagenes+"\\Delete.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				this.new_Button.setGraphic(iw);
+				
+			}else if(type==Button_type.Añadir_Archivo) {
+				FileInputStream input = new FileInputStream(imagenes+"\\Files.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				this.new_Button.setGraphic(iw);
+				
+			}else if(type== Button_type.Bajar) {
+				FileInputStream input = new FileInputStream(imagenes+"\\Down.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				this.new_Button.setGraphic(iw);
+				
+			}else if (type == Button_type.Subir) {
+				FileInputStream input = new FileInputStream(imagenes+"\\Up.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				this.new_Button.setGraphic(iw);
+				
+			}else if(type == Button_type.Buscar) {
+				FileInputStream input = new FileInputStream(imagenes+"\\Search.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				this.new_Button.setGraphic(iw);
+			}
+			
+		}catch(Exception a) {
+			System.out.println(a.getMessage());
 		}
+		
 	}
 	/**
 	 * 
@@ -48,7 +78,14 @@ public class Botones {
 		Button new_Button = new Button();
 			
 		if (type == Button_type.Añadir_Archivo) {
-			new_Button.setText("Añadir_Archivo");
+			try {
+				FileInputStream input = new FileInputStream(imagenes+"\\Files.png"); 
+				Image i = new Image(input);
+				ImageView iw = new ImageView(i); 
+				new_Button.setGraphic(iw);
+			}catch(Exception a) {
+				System.out.println(a.getMessage());
+			}
 			new_Button.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 					Eventos_de_Botones.Añadir(event, Stage ,new_Button );
