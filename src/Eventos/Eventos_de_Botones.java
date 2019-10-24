@@ -4,7 +4,8 @@ import java.awt.Desktop;
 
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
-import Interfaz.TableViewer;
+import TableViews.TableViewer;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +14,6 @@ import java.nio.file.attribute.FileTime;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import Interfaz.TableViewer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,39 +40,38 @@ public class Eventos_de_Botones {
 		    public void handle(final ActionEvent a) {
 		    	FileChooser fileChooser = new FileChooser();
 		        File file = fileChooser.showOpenDialog(Stage);
-		        if (file != null) {	       
-		        	if(getFileExtension(file).contentEquals(".txt") || getFileExtension(file).contentEquals(".pdf")||getFileExtension(file).contentEquals(".docx") ) {
-		        		 tabla.Direccion(file.getPath());
-		        		 tabla.Peso(file.length());
-		        		 tabla.Nombre(file.getName());
-		        		 String Tamaño = Long.toString(file.length());
-		        		 BasicFileAttributes attrs;
-		        			try {
-		        			    attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		        			    FileTime time = attrs.creationTime();
-		        			    
-		        			    String pattern = "yyyy-MM-dd HH:mm:ss";
-		        			    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		        				
-		        			    String formatted = simpleDateFormat.format( new Date( time.toMillis() ) );
-		        			    Main.datos.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
-		        			   
-		        			} catch (IOException e) {
-		        			    e.printStackTrace();
-		        			}
+		        if (file != null) {	      
+		        	try {
+		        		String Tamaño = Long.toString(file.length());
+		        		BasicFileAttributes attrs;
+        			    attrs = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+        			    FileTime time = attrs.creationTime();
+        			    
+        			    String pattern = "yyyy-MM-dd";
+        			    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        				
+        			    String formatted = simpleDateFormat.format( new Date( time.toMillis() ) );
+        			    
+        			    
+        			    if(getFileExtension(file).contentEquals(".txt")) {
+    		        		Main.datostxt.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
+    		        		
+    		        	}else if (getFileExtension(file).contentEquals(".pdf")) {
+    		        		Main.datospdf.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
+    		        	}else if(getFileExtension(file).contentEquals(".docx")) {
+    		        		Main.datosdocx.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
+    		        	}else {
+    		        		Alert Alerta1 = new Alert(AlertType.INFORMATION);
+    		        		Alerta1.setTitle("Archivo Indescifrable");
+    		        		Alerta1.setContentText("Extensiones Soportadas:"+"\n"+
+    		        		"PDF"+"\n"+"DOCX"+"\n"+"TXT");
+    		        		Alerta1.show();
+    		        	}
+        			   
+        			} catch (IOException e) {
+        			    e.printStackTrace();
+        			}
 		        	
-		        		 
-		        	}else {
-		        		
-		        		Alert Alerta1 = new Alert(AlertType.INFORMATION);
-		        		Alerta1.setTitle("Archivo Indescifrable");
-		        		Alerta1.setContentText("Extensiones Soportadas:"+"\n"+
-		        		"PDF"+"\n"+"DOCX"+"\n"+"TXT");
-		        		Alerta1.show();
-		        	}
-		       
-		        	
-		    
 		        }else {
 		        	System.out.println("No hay seleccion alguna");
 		        }

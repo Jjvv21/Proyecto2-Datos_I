@@ -1,10 +1,12 @@
-package Interfaz;
+	package TableViews;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Interfaz.Caracteristicas_De_Archivos;
+import Interfaz.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,30 +16,24 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class TableViewer {
+public class TableViewerDocx extends TableViewer {
 	
-	public static TableViewer tabla = new TableViewer(); 
 	public static TableView<Caracteristicas_De_Archivos> tabla2 = new TableView();
-	public TableColumn columnas;
-	static String Nombre;
-	static String Direccion; 
-	static String Peso;
-	String Fecha;
-	static FilteredList lista; 
-	private VBox caja = new VBox();  
 
+
+	static FilteredList lista; 
+	private TitledPane txtPane = new TitledPane(); 
 	
-	public TableView getTable() {
+	public TableView getTable2() {
 		
 		return tabla2;
 	}
-	
-	
 	
 	/**
 	 * METODO PARA CREAR UN TABLEVIEW CON LOS DATOS DE LOS ARCHIVOS
@@ -50,17 +46,17 @@ public class TableViewer {
 	public void setTable(FilteredList Lista, TableViewer table, TableColumn ColumDir, TableColumn ColumName, TableColumn ColumSize,TableColumn ColumDate) {
 		
 		
-		TableView<Caracteristicas_De_Archivos> tablita = new TableView();
+		TableView<Caracteristicas_De_Archivos> tablita2 = new TableView();
 		
-		tablita.getColumns().addAll(ColumDir, ColumName,ColumSize,ColumDate);
+		tablita2.getColumns().addAll(ColumDir, ColumName,ColumSize,ColumDate);
 		
-		tablita.setOnMouseClicked(new EventHandler<MouseEvent>(){
+		tablita2.setOnMouseClicked(new EventHandler<MouseEvent>(){
 	        @Override
 	        //Ordenar Este metodo en otro lugar
 	        public void handle(MouseEvent event) {
 	        	if (event.getClickCount() == 2) //Checking double click
 	            {
-	        		File file = new File(tablita.getSelectionModel().getSelectedItem().getDireccion());
+	        		File file = new File(tablita2.getSelectionModel().getSelectedItem().getDireccion());
 	        		try {
 	        			
 	        			FileReader Archivo_Por_Leer = new FileReader(file);
@@ -80,40 +76,16 @@ public class TableViewer {
 	        	}             
 	        }
 		});
-		tablita.setItems(Lista);
-		this.tabla2 = tablita;
+		tablita2.setItems(Lista);
+		this.tabla2 = tablita2;
 
 		
-	}
-	public void Direccion(String direccion) {
-		this.Direccion=direccion;
 	
 	}
-	public void Peso(long Peso) {
-		String PesoStr = Long.toString(Peso);
-		this.Peso=PesoStr; 
-	}
-	public void Fecha(String Fecha) {
-		this.Fecha = Fecha; 
-	}
-	public void Nombre(String Nombre) {
-
-		this.Nombre=Nombre;
-	}
-	public static String getName() {
-		return Nombre;
-	}
-	public static String getDireccion() {
-		return Direccion; 
-	}
-	public static String getPeso() {
-		return Peso; 
-	}
-	
-	public void crearCaja(TextField Entrada, TableView<Caracteristicas_De_Archivos> Tabla,FilteredList<Caracteristicas_De_Archivos> Lista) {
-		
+	//TlitedPane con el table view para visualizar Txt 
+	public void crearCaja(TextField Entrada2, TableView<Caracteristicas_De_Archivos> Tabla,FilteredList<Caracteristicas_De_Archivos> Lista) {
 		BorderPane EstructuraInterior = new BorderPane(); 
-		ToolBar Superior = new ToolBar(Entrada);
+		ToolBar Superior = new ToolBar(Entrada2);
 		EstructuraInterior.setTop(Superior);
 		EstructuraInterior.setCenter(Tabla);
 		ScrollPane izquierda = new ScrollPane(EstructuraInterior);
@@ -121,11 +93,9 @@ public class TableViewer {
 		izquierda.setMaxSize(335, 1000);
 		Tabla.setPrefHeight(1000);
 		Tabla.setPrefWidth(1000);
-		VBox Vertical = new VBox(izquierda);
-		Vertical.setPadding(new Insets(15,0,15,15));
 		//METODO PARA LA BUSQUEDA
-		Entrada.setPromptText("BuscarArchivo");
-		Entrada.textProperty().addListener((prop, old, text) -> {
+		Entrada2.setPromptText("BuscarArchivo");
+		Entrada2.textProperty().addListener((prop, old, text) -> {
 		    Lista.setPredicate(person -> {
 		        if(text == null || text.isEmpty()) return true;
 		        
@@ -133,14 +103,15 @@ public class TableViewer {
 		        return name.contains(text.toLowerCase());
 		    });
 		});
-		
-		this.caja=Vertical;
+		TitledPane Datos_Docx = new TitledPane("", EstructuraInterior);
+		Datos_Docx.setText("Archivos DOCX");
+		Datos_Docx.setExpanded(false);
+		this.txtPane=Datos_Docx;
 		this.tabla2 = Tabla;
-	}
-	public VBox getCaja() {
-		return caja;
-	}
 
-	
+	}
+	public TitledPane getDocxPane() {
+		return txtPane;
+	}
 
 }
