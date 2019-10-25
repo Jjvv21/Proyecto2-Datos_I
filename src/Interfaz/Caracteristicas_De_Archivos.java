@@ -29,5 +29,8 @@ public class Caracteristicas_De_Archivos {
      public String getFecha() {
     	 return Fecha.get();
      }
+     public String ToString() {
+    	 return Nombre+","+Peso+","+Direccion+","+Fecha;
+     }
  }
 

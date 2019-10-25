@@ -1,5 +1,6 @@
 package Interfaz;
 
+import Logica.BubbleSort;
 import TableViews.TableViewer;
 import TableViews.TableViewerDocx;
 import TableViews.TableViewerPdf;
@@ -98,6 +99,9 @@ public class Main extends Application {
 		TableViewerPdf Estructura4 = new TableViewerPdf();
 		TableViewerPdf tabla3 = new TableViewerPdf();
 		
+		
+		//BUBBLESORT
+		BubbleSort OrdenarFecha = new BubbleSort();
 		//BOTON AÑADIR
 		Botones Añadir = new Botones();
 		//BOTON QUITAR
@@ -125,7 +129,7 @@ public class Main extends Application {
 		
 		
 		
-		
+
 		// CREACION DE ELEMENTOS CON SUS PARAMETROS
 		//COLUMNAS TXT
 		Columnas.Nametxt(Name1);

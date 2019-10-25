@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import Eventos.Eventos_de_Botones;
 import Interfaz.Botones;
 import Interfaz.Button_type;
+import Logica.BubbleSort;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 public class Botones {
 	private Button new_Button; 
 	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
-	
+	BubbleSort BubbleSort = new BubbleSort();
 	
 	
 	
@@ -104,6 +105,11 @@ public class Botones {
 		Button Buscar = new Button();
 		if (Type == Ordenar_Type.Bubble) {
 			Buscar.setText("Sort Dates");
+			Buscar.setOnAction(new EventHandler<ActionEvent>() {
+			    public void handle(ActionEvent t) {
+			    	BubbleSort.mostrarLista(Main.datostxt);
+			    	}
+			    });
 		}else if(Type == Ordenar_Type.Quick) {
 			Buscar.setText("Sort Names");
 		}else if(Type == Ordenar_Type.Radix) {

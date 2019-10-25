@@ -4,6 +4,7 @@ import java.awt.Desktop;
 
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
+import Logica.BubbleSort;
 import TableViews.TableViewer;
 
 import java.io.File;
@@ -55,7 +56,6 @@ public class Eventos_de_Botones {
         			    
         			    if(getFileExtension(file).contentEquals(".txt")) {
     		        		Main.datostxt.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
-    		        		
     		        	}else if (getFileExtension(file).contentEquals(".pdf")) {
     		        		Main.datospdf.add(new Caracteristicas_De_Archivos(file.getName(),Tamaño, file.getPath(),formatted));
     		        	}else if(getFileExtension(file).contentEquals(".docx")) {
