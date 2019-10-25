@@ -18,12 +18,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 
 
 public class Main extends Application { 
@@ -36,6 +38,7 @@ public class Main extends Application {
 	private static TextField searchpdf = new TextField();
 	public static Label texto = new Label("Aquí se mostrarán las coincidencias del texto que busques.");
 	private static VBox Vertical = new VBox();
+	Image icono = new Image("file:icon.png");
 	
 	
 	//ObservableList para los Txt
@@ -188,8 +191,6 @@ public class Main extends Application {
 
 		
 		
-		
-		
 		//Configuración Toolbars
 		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
 		Herramientas.setStyle("-fx-background-color: #6C6C6C;");
@@ -200,15 +201,14 @@ public class Main extends Application {
 		Vertical.getChildren().addAll(Estructura2.getTXTPane(),Estructura3.getDocxPane(),Estructura4.getPdfPane());
 		
 		//ESTRUCTURA PRINCIPAL
-		
-		//Configuración del Texto en el Label
-		
+
 		texto.setWrapText(true);
 		Estructura.setTop(Herramientas);
 		Estructura.setCenter(archroot);
 		Estructura.setLeft(Vertical);
 		Estructura.setRight(controles.getControles());
 		Scene escena = new Scene(Estructura,1350,1000);
+		Stage.getIcons().add(icono);
 		Stage.setTitle("TextFinder");
 		Stage.setScene(escena);
 		Stage.show();
