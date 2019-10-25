@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Interfaz.Botones;
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
+import Interfaz.Ordenar_Type;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -25,10 +27,14 @@ import javafx.scene.layout.VBox;
 public class TableViewerDocx extends TableViewer {
 	
 	public static TableView<Caracteristicas_De_Archivos> tabla2 = new TableView();
-
-
 	static FilteredList lista; 
 	private TitledPane txtPane = new TitledPane(); 
+	private Botones BubbleSort = new Botones();
+	private Botones QuickSort = new Botones();
+	private Botones RadixSort = new Botones();
+	
+	
+	
 	
 	public TableView getTable2() {
 		
@@ -84,8 +90,16 @@ public class TableViewerDocx extends TableViewer {
 	}
 	//TlitedPane con el table view para visualizar Txt 
 	public void crearCaja(TextField Entrada2, TableView<Caracteristicas_De_Archivos> Tabla,FilteredList<Caracteristicas_De_Archivos> Lista) {
+		// BOTONES DE BUSQUEDA 
+		BubbleSort.BotonesDeBusqueda(BubbleSort,Ordenar_Type.Bubble);
+		QuickSort.BotonesDeBusqueda(QuickSort,Ordenar_Type.Quick);
+		RadixSort.BotonesDeBusqueda(RadixSort,Ordenar_Type.Radix);
+		
+		
+		// CREACION DE LA ESTRUCTURA
 		BorderPane EstructuraInterior = new BorderPane(); 
-		ToolBar Superior = new ToolBar(Entrada2);
+		ScrollPane Scroll_Para_EstructuraInterior = new ScrollPane(EstructuraInterior);
+		ToolBar Superior = new ToolBar(Entrada2,BubbleSort.getButton(),QuickSort.getButton(),RadixSort.getButton());
 		EstructuraInterior.setTop(Superior);
 		EstructuraInterior.setCenter(Tabla);
 		ScrollPane izquierda = new ScrollPane(EstructuraInterior);
@@ -103,7 +117,7 @@ public class TableViewerDocx extends TableViewer {
 		        return name.contains(text.toLowerCase());
 		    });
 		});
-		TitledPane Datos_Docx = new TitledPane("", EstructuraInterior);
+		TitledPane Datos_Docx = new TitledPane("", Scroll_Para_EstructuraInterior);
 		Datos_Docx.setText("Archivos DOCX");
 		Datos_Docx.setExpanded(false);
 		this.txtPane=Datos_Docx;

@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Interfaz.Botones;
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
+import Interfaz.Ordenar_Type;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
@@ -21,10 +23,18 @@ import javafx.scene.layout.VBox;
 
 public class TableViewerPdf extends TableViewer {
 	public static TableView<Caracteristicas_De_Archivos> tabla3 = new TableView();
-
-
 	static FilteredList lista; 
 	private TitledPane pdfPane = new TitledPane(); 
+	private Botones BubbleSort = new Botones();
+	private Botones QuickSort = new Botones();
+	private Botones RadixSort = new Botones();
+	
+	
+	
+	
+	
+	
+	
 	
 	public TableView getTable3() {
 		
@@ -80,8 +90,16 @@ public class TableViewerPdf extends TableViewer {
 	}
 	//TlitedPane con el table view para visualizar Txt 
 	public void crearCaja(TextField Entrada3, TableView<Caracteristicas_De_Archivos> Tabla,FilteredList<Caracteristicas_De_Archivos> Lista) {
+		// BOTONES DE BUSQUEDA 
+		BubbleSort.BotonesDeBusqueda(BubbleSort,Ordenar_Type.Bubble);
+		QuickSort.BotonesDeBusqueda(QuickSort,Ordenar_Type.Quick);
+		RadixSort.BotonesDeBusqueda(RadixSort,Ordenar_Type.Radix);
+		
+		
+		// CREACION DE LA ESTRUCTURA 
 		BorderPane EstructuraInterior = new BorderPane(); 
-		ToolBar Superior = new ToolBar(Entrada3);
+		ScrollPane Scroll_Para_EstructuraInterior = new ScrollPane(EstructuraInterior);
+		ToolBar Superior = new ToolBar(Entrada3,BubbleSort.getButton(),QuickSort.getButton(),RadixSort.getButton());
 		EstructuraInterior.setTop(Superior);
 		EstructuraInterior.setCenter(Tabla);
 		ScrollPane izquierda = new ScrollPane(EstructuraInterior);
@@ -89,6 +107,7 @@ public class TableViewerPdf extends TableViewer {
 		izquierda.setMaxSize(335, 1000);
 		Tabla.setPrefHeight(1000);
 		Tabla.setPrefWidth(1000);
+		
 		//METODO PARA LA BUSQUEDA
 		Entrada3.setPromptText("BuscarArchivo");
 		Entrada3.textProperty().addListener((prop, old, text) -> {
@@ -99,7 +118,7 @@ public class TableViewerPdf extends TableViewer {
 		        return name.contains(text.toLowerCase());
 		    });
 		});
-		TitledPane pdf_Pane = new TitledPane("", EstructuraInterior);
+		TitledPane pdf_Pane = new TitledPane("", Scroll_Para_EstructuraInterior);
 		pdf_Pane.setText("Archivos PDF");
 		pdf_Pane.setExpanded(false);
 		this.pdfPane=pdf_Pane;

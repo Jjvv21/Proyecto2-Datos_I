@@ -50,69 +50,40 @@ public class Main extends Application {
 	
 	public  void start(Stage Stage) {
 		
+		
+		/// TXT /// 
 		TableColumn<Caracteristicas_De_Archivos, String> Name1 = new TableColumn<>("Name");
-   		Name1.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Nombre"));
-		Name1.setResizable(true);
-		
+	
 		TableColumn<Caracteristicas_De_Archivos, String> Size1 = new TableColumn<>("Size(Bytes)");
-		Size1.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Peso"));
-		Size1.setResizable(true);
-		Size1.setMinWidth(150);
-		
+				
 		TableColumn<Caracteristicas_De_Archivos, String> Location1 = new TableColumn<>("Location");
-		
-		Location1.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Direccion"));
-		Location1.setResizable(true);
-		
+
 		TableColumn<Caracteristicas_De_Archivos, String> Date1 = new TableColumn<>("Date");
+
+
 		
-		Date1.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Fecha"));
-		Date1.setResizable(true);
-		
-		////////DOCX /////
+		///// DOCX /////
 		
 		TableColumn<Caracteristicas_De_Archivos, String> Name2 = new TableColumn<>("Name");
-   		Name2.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Nombre"));
-		Name2.setResizable(true);
-		
+   		
 		TableColumn<Caracteristicas_De_Archivos, String> Size2 = new TableColumn<>("Size(Bytes)");
-		Size2.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Peso"));
-		Size2.setResizable(true);
-		Size2.setMinWidth(150);
 		
 		TableColumn<Caracteristicas_De_Archivos, String> Location2 = new TableColumn<>("Location");
 		
-		Location2.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Direccion"));
-		Location2.setResizable(true);
-		
 		TableColumn<Caracteristicas_De_Archivos, String> Date2 = new TableColumn<>("Date");
-		
-		Date2.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Fecha"));
-		Date2.setResizable(true);
-		
+
 		////PDF /////
+		
 		TableColumn<Caracteristicas_De_Archivos, String> Name3 = new TableColumn<>("Name");
-   		Name3.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Nombre"));
-		Name3.setResizable(true);
 		
 		TableColumn<Caracteristicas_De_Archivos, String> Size3 = new TableColumn<>("Size(Bytes)");
-		Size3.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Peso"));
-		Size3.setResizable(true);
-		Size3.setMinWidth(150);
-		
+	
 		TableColumn<Caracteristicas_De_Archivos, String> Location3 = new TableColumn<>("Location");
-		
-		Location3.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Direccion"));
-		Location3.setResizable(true);
 		
 		TableColumn<Caracteristicas_De_Archivos, String> Date3 = new TableColumn<>("Date");
 		
-		Date3.setCellValueFactory(new PropertyValueFactory<Caracteristicas_De_Archivos, String>("Fecha"));
-		Date3.setResizable(true);
-		
-		
-        // ESTRUCTURA PARA LA TABLA
 
+        // ESTRUCTURA PARA LA TABLA
 
         //TXT
 		TableViewer tabla = new TableViewer();
@@ -137,7 +108,7 @@ public class Main extends Application {
 		//
 		Controles controles = new Controles();
 		//
-		Columnas columnas = new Columnas();
+		Columnas Columnas = new Columnas();
 
 		//Configuración del Stackpane que tiene al label en donde se mostrará el texto
 		StackPane centeredarch = new StackPane(texto);
@@ -153,20 +124,49 @@ public class Main extends Application {
 		
 		
 		// CREACION DE ELEMENTOS CON SUS PARAMETROS
+		//COLUMNAS TXT
+		Columnas.Nametxt(Name1);
+		//
+		Columnas.Tamañotxt(Size1);
+		//
+		Columnas.Direcciontxt(Location1);
+		//
+		Columnas.Fechatxt(Date1);
 	
-		tabla.setTable(filteredDatatxt, tabla, Location1, Name1,Size1,Date1);
+		
+		//COLUMNAS DOCX
+		Columnas.Namedocx(Name2);
+		//
+		Columnas.TamañoDocx(Size2);;
+		//
+		Columnas.DireccionDocx(Location2);
+		//
+		Columnas.FechaDocx(Date2);
+		
+		//COLUMNAS PDF
+		Columnas.NamePdf(Name3);
+		//
+		Columnas.TamañoPdf(Size3);;
+		//
+		Columnas.DireccionPdf(Location3);
+		//
+		Columnas.FechaPdf(Date3);
+		
+		//COLUMNAS TXT 
+		//
+		tabla.setTable(filteredDatatxt, tabla, Columnas.getDirecciontxt(), Columnas.getNombretxt(),Columnas.getTamañotxt(),Columnas.getFechaTxt());
 		//
 		Estructura2.crearCaja(searchtxt, tabla.getTable(),filteredDatatxt);
 		
-		
+		//COLUMNAS DOCX
 		//
-		tabla2.setTable(filteredDatadocx, tabla2, Location2, Name2,Size2,Date2);
+		tabla2.setTable(filteredDatadocx, tabla2, Columnas.getDireccionDocx(), Columnas.getNombreDocx(),Columnas.getTamañoDocx(),Columnas.getFechaDocx());
 		//
 		Estructura3.crearCaja(searchdocx, tabla2.getTable2(), filteredDatadocx);
 		
-		
+		//COLUMNAS PDF
 		//
-		tabla3.setTable(filteredDatapdf, tabla3, Location3, Name3,Size3,Date3);
+		tabla3.setTable(filteredDatapdf, tabla3, Columnas.getDireccionPdf(),Columnas.getNombrePdf(),Columnas.getTamañoPdf(),Columnas.getFechaPdf());
 		//
 		Estructura4.crearCaja(searchpdf,tabla3.getTable3(), filteredDatapdf);
 		//
@@ -184,6 +184,7 @@ public class Main extends Application {
 		caja_De_Entrada.setPromptText("Buscar...");
 		//
 		controles.CrearToolBar(controles);
+		//
 
 		
 		

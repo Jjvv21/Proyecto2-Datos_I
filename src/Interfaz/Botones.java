@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 public class Botones {
 	private Button new_Button; 
 	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
+	
+	
+	
+	
 	public Button getButton() {
 		return new_Button; 
 		
@@ -94,6 +98,18 @@ public class Botones {
 
 		}
 		this.new_Button= new_Button;
+	}
+	//BOTONES PARA ORDENAR 
+	public void BotonesDeBusqueda(Botones button, Ordenar_Type Type) {
+		Button Buscar = new Button();
+		if (Type == Ordenar_Type.Bubble) {
+			Buscar.setText("Sort Dates");
+		}else if(Type == Ordenar_Type.Quick) {
+			Buscar.setText("Sort Names");
+		}else if(Type == Ordenar_Type.Radix) {
+			Buscar.setText("Sort Sizes");
+		}
+		this.new_Button=Buscar; 
 	}
 	
 }
