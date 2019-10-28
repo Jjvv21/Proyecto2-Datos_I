@@ -9,6 +9,7 @@ import Interfaz.Botones;
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
 import Interfaz.Ordenar_Type;
+import Interfaz.PantallaDeTexto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,7 +34,6 @@ public class TableViewer {
 	private Botones BubbleSort = new Botones();
 	private Botones QuickSort = new Botones();
 	private Botones RadixSort = new Botones();
-	
 	
 	
 	

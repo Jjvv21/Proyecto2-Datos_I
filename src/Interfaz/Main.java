@@ -1,5 +1,7 @@
 package Interfaz;
 
+import java.io.FileNotFoundException;
+
 import Logica.BubbleSort;
 import TableViews.TableViewer;
 import TableViews.TableViewerDocx;
@@ -37,22 +39,25 @@ public class Main extends Application {
 	private static TextField searchtxt = new TextField();
 	private static TextField searchdocx = new TextField();
 	private static TextField searchpdf = new TextField();
-	public static Label texto = new Label("Aquí se mostrarán las coincidencias del texto que busques.");
 	private static VBox Vertical = new VBox();
+	public static BorderPane Spane = new BorderPane();
 	Image icono = new Image("file:icon.png");
+	public static Label texto = new Label("Aqui se mostrara el cuerpo del documento seleccionado");
 	
 	
 	//ObservableList para los Txt
 	public static ObservableList<Caracteristicas_De_Archivos> datostxt = FXCollections.observableArrayList();
 	FilteredList<Caracteristicas_De_Archivos> filteredDatatxt = new FilteredList<>(datostxt, p -> true);
 	//ObservableList para los Docx 
+	
 	public static ObservableList<Caracteristicas_De_Archivos> datosdocx = FXCollections.observableArrayList();
 	FilteredList<Caracteristicas_De_Archivos> filteredDatadocx = new FilteredList<>(datosdocx, p -> true);
+	
 	//ObservableList para los Pdf 
 	public static ObservableList<Caracteristicas_De_Archivos> datospdf = FXCollections.observableArrayList();
 	FilteredList<Caracteristicas_De_Archivos> filteredDatapdf = new FilteredList<>(datospdf, p -> true);
 	
-	public  void start(Stage Stage) {
+	public  void start(Stage Stage) throws FileNotFoundException {
 		
 		
 		/// TXT /// 
@@ -116,18 +121,12 @@ public class Main extends Application {
 		Controles controles = new Controles();
 		//
 		Columnas Columnas = new Columnas();
+		//
+		PantallaDeTexto ClaseTexto = new PantallaDeTexto();
+		//
+		Botones MenuB = new Botones();
 
 		//Configuración del Stackpane que tiene al label en donde se mostrará el texto
-		StackPane centeredarch = new StackPane(texto);
-		centeredarch.setStyle("-fx-background-color: #d2d7db;");
-		
-		//
-		StackPane archroot = new StackPane(centeredarch);
-		archroot.setPadding(new Insets(35));
-
-		
-		
-		
 		
 
 		// CREACION DE ELEMENTOS CON SUS PARAMETROS
@@ -188,15 +187,19 @@ public class Main extends Application {
 		//
 		Buscar.setButton(Buscar, Button_type.Buscar);
 		//
+		MenuB.zoom(MenuB,Button_type.Zoom);
+		//
 		caja_De_Entrada.setPromptText("Buscar...");
 		//
 		controles.CrearToolBar(controles);
 		//
-
-		
+	
+		ClaseTexto.CrearEstructuraDeTexto(texto);
+		//
+		ClaseTexto.setTextPane(Spane);
 		
 		//Configuración Toolbars
-		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton());
+		Herramientas.getItems().addAll(Añadir.getButton(),Quitar.getButton(),Subir.getButton(),Bajar.getButton(),caja_De_Entrada,Buscar.getButton(),MenuB.getMenuB());
 		Herramientas.setStyle("-fx-background-color: #6C6C6C;");
 
 		// ESTRUCTURA DE LA CAJA IZQUIERDA
@@ -205,10 +208,8 @@ public class Main extends Application {
 		Vertical.getChildren().addAll(Estructura2.getTXTPane(),Estructura3.getDocxPane(),Estructura4.getPdfPane());
 		
 		//ESTRUCTURA PRINCIPAL
-
-		texto.setWrapText(true);
 		Estructura.setTop(Herramientas);
-		Estructura.setCenter(archroot);
+		Estructura.setCenter(Spane);
 		Estructura.setLeft(Vertical);
 		Estructura.setRight(controles.getControles());
 		Scene escena = new Scene(Estructura,1350,1000);

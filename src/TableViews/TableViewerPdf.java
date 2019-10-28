@@ -9,6 +9,8 @@ import Interfaz.Botones;
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
 import Interfaz.Ordenar_Type;
+import Interfaz.PantallaDeTexto;
+import Logica.LeerPdf;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
@@ -28,8 +30,8 @@ public class TableViewerPdf extends TableViewer {
 	private Botones BubbleSort = new Botones();
 	private Botones QuickSort = new Botones();
 	private Botones RadixSort = new Botones();
-	
-	
+	PantallaDeTexto Texto = new PantallaDeTexto();
+	private LeerPdf lectorPdf = new LeerPdf();
 	
 	
 	
@@ -64,20 +66,11 @@ public class TableViewerPdf extends TableViewer {
 	            {
 	        		File file = new File(tablita3.getSelectionModel().getSelectedItem().getDireccion());
 	        		try {
-	        			
-	        			FileReader Archivo_Por_Leer = new FileReader(file);
-		        		try (BufferedReader reader = new BufferedReader(Archivo_Por_Leer)) {
-
-		        	        String line;
-		        	        while ((line = reader.readLine()) != null)
-		        	        	Main.texto.setText(line);
-		        	    } catch (IOException e) {
-		        	        e.printStackTrace();
-		        	    }
-	        			
-	        		}catch(Exception L){
-	        			
-	        		}
+						lectorPdf.PdfReader(file);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 	        		
 	        	}             
 	        }

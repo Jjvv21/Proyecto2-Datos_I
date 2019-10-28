@@ -9,6 +9,7 @@ import Interfaz.Botones;
 import Interfaz.Caracteristicas_De_Archivos;
 import Interfaz.Main;
 import Interfaz.Ordenar_Type;
+import Logica.LeerDocx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -32,7 +33,7 @@ public class TableViewerDocx extends TableViewer {
 	private Botones BubbleSort = new Botones();
 	private Botones QuickSort = new Botones();
 	private Botones RadixSort = new Botones();
-	
+	private LeerDocx LectorDocx = new LeerDocx();
 	
 	
 	
@@ -63,22 +64,7 @@ public class TableViewerDocx extends TableViewer {
 	        	if (event.getClickCount() == 2) //Checking double click
 	            {
 	        		File file = new File(tablita2.getSelectionModel().getSelectedItem().getDireccion());
-	        		try {
-	        			
-	        			FileReader Archivo_Por_Leer = new FileReader(file);
-		        		try (BufferedReader reader = new BufferedReader(Archivo_Por_Leer)) {
-
-		        	        String line;
-		        	        while ((line = reader.readLine()) != null)
-		        	        	Main.texto.setText(line);
-		        	    } catch (IOException e) {
-		        	        e.printStackTrace();
-		        	    }
-	        			
-	        		}catch(Exception L){
-	        			
-	        		}
-	        		
+	        		LectorDocx.SetText(file);
 	        	}             
 	        }
 		});

@@ -23,6 +23,7 @@ public class Caracteristicas_De_Archivos {
          return Peso.get();
      }
 
+     
      public String getDireccion() {
          return Direccion.get();
      }
