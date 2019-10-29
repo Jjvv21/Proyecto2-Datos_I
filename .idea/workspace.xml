@@ -8,6 +8,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -15,16 +22,23 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jars" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\diabl\IdeaProjects\Proyecto2-Datos_I" />
+      <recent name="C:\Users\diabl\IdeaProjects\Proyecto2-Datos_I\src" />
+      <recent name="C:\Users\diabl\IdeaProjects\Proyecto2-Datos_I\icons" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -71,6 +85,9 @@
       <updated>1571796598501</updated>
       <workItem from="1571796601612" duration="2238000" />
       <workItem from="1572025424721" duration="1588000" />
+      <workItem from="1572028572937" duration="36000" />
+      <workItem from="1572063049568" duration="1755000" />
+      <workItem from="1572319912934" duration="2732000" />
     </task>
     <servers />
   </component>

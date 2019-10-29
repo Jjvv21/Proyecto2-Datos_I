@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Botones {
+public class  Botones {
 	private Button new_Button; 
 	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
 	BubbleSort BubbleSort = new BubbleSort();
@@ -126,8 +126,7 @@ public class Botones {
 	 //CREAR UN MENUBUTTON CON IMAGEVIEW Y MENUITEMS 
 	public void zoom(Botones menubutton , Button_type Type) throws FileNotFoundException {
 		if(Type ==Button_type.Zoom) {
-			FileInputStream input = new FileInputStream(imagenes+"\\zoom.png");
-	        Image image = new Image(input);
+	        Image image = new Image("file:icons/zoom.png");
 	        ImageView imageView = new ImageView(image);
 			MenuItem menuItem1 = new MenuItem("x500");
 			menuItem1.setOnAction(new EventHandler<ActionEvent>() {
