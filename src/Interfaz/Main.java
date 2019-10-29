@@ -193,7 +193,6 @@ public class Main extends Application {
 		//
 		controles.CrearToolBar(controles);
 		//
-	
 		ClaseTexto.CrearEstructuraDeTexto(texto);
 		//
 		ClaseTexto.setTextPane(Spane);
