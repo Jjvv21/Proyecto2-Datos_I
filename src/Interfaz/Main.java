@@ -42,7 +42,7 @@ public class Main extends Application {
 	private static VBox Vertical = new VBox();
 	public static BorderPane Spane = new BorderPane();
 	Image icono = new Image("file:icon.png");
-	public static Label texto = new Label("Aqui se mostrara el cuerpo del documento seleccionado");
+	public static Label texto = new Label("Aqui se mostrara el cuerpo del documento seleccionado.");
 	
 	
 	//ObservableList para los Txt
