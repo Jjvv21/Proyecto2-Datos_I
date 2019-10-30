@@ -8,6 +8,8 @@ import Eventos.Eventos_de_Botones;
 import Interfaz.Botones;
 import Interfaz.Button_type;
 import Logica.BubbleSort;
+import Logica.QuickSort;
+import Logica.RadixSort;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -22,10 +24,11 @@ import javafx.stage.Stage;
 public class  Botones {
 	private Button new_Button; 
 	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
-	BubbleSort BubbleSort = new BubbleSort();
+	private BubbleSort BubbleSort = new BubbleSort();
 	private MenuButton new_MenuButton; 
 	PantallaDeTexto ZOOM = new PantallaDeTexto();
-		
+	private RadixSort Radix = new RadixSort();
+	private QuickSort Quick = new QuickSort();
 	
 	public Button getButton() {
 		return new_Button; 
@@ -40,32 +43,27 @@ public class  Botones {
 		try {
 			this.new_Button = new Button();
 			if(type == Button_type.Quitar_Archivo ) {
-				FileInputStream input = new FileInputStream(imagenes+"\\Delete.png"); 
-				Image i = new Image(input);
+				Image i = new Image("file:icons/Delete.png");
 				ImageView iw = new ImageView(i); 
 				this.new_Button.setGraphic(iw);
 				
 			}else if(type==Button_type.Añadir_Archivo) {
-				FileInputStream input = new FileInputStream(imagenes+"\\Files.png"); 
-				Image i = new Image(input);
+				Image i = new Image("file:icons/Files.png");
 				ImageView iw = new ImageView(i); 
 				this.new_Button.setGraphic(iw);
 				
 			}else if(type== Button_type.Bajar) {
-				FileInputStream input = new FileInputStream(imagenes+"\\Down.png"); 
-				Image i = new Image(input);
+				Image i = new Image("file:icons/Down.png");
 				ImageView iw = new ImageView(i); 
 				this.new_Button.setGraphic(iw);
 				
 			}else if (type == Button_type.Subir) {
-				FileInputStream input = new FileInputStream(imagenes+"\\Up.png"); 
-				Image i = new Image(input);
+				Image i = new Image("file:icons/Up.png");
 				ImageView iw = new ImageView(i); 
 				this.new_Button.setGraphic(iw);
 				
-			}else if(type == Button_type.Buscar) {
-				FileInputStream input = new FileInputStream(imagenes+"\\Search.png"); 
-				Image i = new Image(input);
+			}else if(type == Button_type.Buscar) { 
+				Image i = new Image("file:icons/Search.png");
 				ImageView iw = new ImageView(i); 
 				this.new_Button.setGraphic(iw);
 			}
@@ -89,8 +87,7 @@ public class  Botones {
 			
 		if (type == Button_type.Añadir_Archivo) {
 			try {
-				FileInputStream input = new FileInputStream(imagenes+"\\Files.png"); 
-				Image i = new Image(input);
+				Image i = new Image("file:icons/Files.png");
 				ImageView iw = new ImageView(i); 
 				new_Button.setGraphic(iw);
 			}catch(Exception a) {
@@ -111,14 +108,24 @@ public class  Botones {
 		if (Type == Ordenar_Type.Bubble) {
 			Buscar.setText("Sort Dates");
 			Buscar.setOnAction(new EventHandler<ActionEvent>() {
-			    public void handle(ActionEvent t) {
+			    public void handle(ActionEvent a) {
 			    	BubbleSort.mostrarLista(Main.datostxt);
 			    	}
 			    });
 		}else if(Type == Ordenar_Type.Quick) {
 			Buscar.setText("Sort Names");
+			Buscar.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent b ) {
+					Quick.mostrarLista(Main.datostxt);
+				}
+			});
 		}else if(Type == Ordenar_Type.Radix) {
 			Buscar.setText("Sort Sizes");
+			Buscar.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent b ) {
+					Radix.mostrarLista(Main.datostxt);
+				}
+			});
 		}
 		this.new_Button=Buscar; 
 	}
