@@ -7,8 +7,9 @@ import java.io.FileNotFoundException;
 import Eventos.Eventos_de_Botones;
 import Interfaz.Botones;
 import Interfaz.Button_type;
-import Logica.BubbleSort;
-import Logica.QuickSort;
+import LinkedList.BubbleSort;
+import LinkedList.NodoQuickSort;
+import LinkedList.QuickSort;
 import Logica.RadixSort;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,11 +25,13 @@ import javafx.stage.Stage;
 public class  Botones {
 	private Button new_Button; 
 	String imagenes = ("C:\\Users\\Julio\\Desktop\\images\\Pitos");
-	private BubbleSort BubbleSort = new BubbleSort();
+	
 	private MenuButton new_MenuButton; 
 	PantallaDeTexto ZOOM = new PantallaDeTexto();
 	private RadixSort Radix = new RadixSort();
 	private QuickSort Quick = new QuickSort();
+	private BubbleSort BubbleSort = new BubbleSort();
+	
 	
 	public Button getButton() {
 		return new_Button; 
@@ -109,14 +112,15 @@ public class  Botones {
 			Buscar.setText("Sort Dates");
 			Buscar.setOnAction(new EventHandler<ActionEvent>() {
 			    public void handle(ActionEvent a) {
-			    	BubbleSort.mostrarLista(Main.datostxt);
+			    	
 			    	}
 			    });
 		}else if(Type == Ordenar_Type.Quick) {
 			Buscar.setText("Sort Names");
 			Buscar.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent b ) {
-					Quick.mostrarLista(Main.datostxt);
+					
+					
 				}
 			});
 		}else if(Type == Ordenar_Type.Radix) {
@@ -161,7 +165,7 @@ public class  Botones {
 					
 				}
 			});
-		    MenuButton menuButton = new MenuButton("Zoom",imageView);
+		    MenuButton menuButton = new MenuButton("",imageView);
 		    menuButton.getItems().addAll(menuItem1,menuItem2,menuItem3);
 		    
 		    this.new_MenuButton=menuButton;

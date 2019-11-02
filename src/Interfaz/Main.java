@@ -2,7 +2,7 @@ package Interfaz;
 
 import java.io.FileNotFoundException;
 
-import Logica.BubbleSort;
+
 import TableViews.TableViewer;
 import TableViews.TableViewerDocx;
 import TableViews.TableViewerPdf;
@@ -69,7 +69,7 @@ public class Main extends Application {
 
 		TableColumn<Caracteristicas_De_Archivos, String> Date1 = new TableColumn<>("Date");
 
-
+		
 		
 		///// DOCX /////
 		
@@ -105,8 +105,7 @@ public class Main extends Application {
 		TableViewerPdf tabla3 = new TableViewerPdf();
 		
 		
-		//BUBBLESORT
-		BubbleSort OrdenarFecha = new BubbleSort();
+
 		//BOTON AÑADIR
 		Botones Añadir = new Botones();
 		//BOTON QUITAR
